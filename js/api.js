@@ -35,6 +35,7 @@ const API = (() => {
       uniform_policy: { label: 'Uniform Policy (PDF)', url: 'https://drive.google.com/file/d/1hiFChOHQVLxFbiU0I7drBEZF0FKhWzux/view?usp=sharing' },
       potluck_rsvp: { label: 'Potluck RSVP', url: 'https://svapotluck.gzring.com' },
       parent_portal: { label: 'Parent Portal', url: 'https://svaportal.com' },
+      supply_list: { label: 'Official supply list document', url: 'https://svaportal.com' },
       conduct_prek: { label: 'PreK Behavior & Support Policy', url: 'https://docs.google.com/document/d/1hYHma0sz8YpLHJAudlwXB5pm-CQA3DwBdjRNTDfc20M/edit?usp=sharing' },
       conduct_k8: { label: 'Student Conduct & Character Policy', url: 'https://docs.google.com/document/d/187T0y7Ic7j7ZtC9yIPJUWJaeriT1gMHjqKcbZej4FAE/edit?usp=sharing' },
       whatsapp_prek: { label: 'PreK WhatsApp Group', url: '#' },
