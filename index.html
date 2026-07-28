@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SVA Kickstart — Back to School 2026-27</title>
+  <meta name="description" content="Silicon Valley Academy back-to-school kickstart: everything your family needs for an amazing start.">
+  <link rel="icon" href="assets/img/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <div class="doodles" id="doodles"></div>
+  <canvas id="confetti"></canvas>
+
+  <div class="shell">
+    <!-- top bar (shown after sign-in) -->
+    <header class="topbar hidden" id="topbar">
+      <img src="assets/img/logo.png" alt="SVA logo">
+      <div>
+        <div class="t-name">SVA Kickstart</div>
+        <div class="t-sub" id="topbarSub">Back to School 2026-27</div>
+      </div>
+      <div class="spacer"></div>
+      <button class="pill" id="btnSignOut">Sign out</button>
+    </header>
+
+    <div class="progress-wrap hidden" id="progressWrap">
+      <div class="progress-track"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-label" id="progressLabel">0% ready</div>
+    </div>
+
+    <!-- ============ LANDING / AUTH ============ -->
+    <section id="viewLanding">
+      <div class="hero">
+        <img class="logo-big" src="assets/img/logo.png" alt="Silicon Valley Academy">
+        <h1>Ready. Set. <span class="accent">School!</span></h1>
+        <p class="tag">Welcome to the SVA <b>Kickstart</b> — your family's fun, five-minute launchpad for the 2026-27 school year. 🚀</p>
+        <div class="cd-caption mt" id="cdCaption">Countdown to the first day of school</div>
+        <div class="countdown" id="countdown"></div>
+      </div>
+
+      <div class="card auth-card" id="authEmail">
+        <h3>👋 Let's find your family</h3>
+        <p>Enter the email you use with the school and we'll send you a quick verification code.</p>
+        <input class="field" type="email" id="inpEmail" placeholder="parent@email.com" autocomplete="email" inputmode="email">
+        <button class="btn mt" id="btnSendCode">Send my code ✉️</button>
+        <div class="err" id="errEmail"></div>
+        <div class="hint" id="demoHintEmail"></div>
+      </div>
+
+      <div class="card auth-card hidden" id="authCode">
+        <h3>📬 Check your inbox</h3>
+        <p>We emailed a 6-digit code to <b id="codeEmailLabel"></b>. Enter it below.</p>
+        <div class="code-inputs" id="codeInputs">
+          <input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric"><input maxlength="1" inputmode="numeric">
+        </div>
+        <button class="btn" id="btnVerify">Let's go! 🎉</button>
+        <div class="err" id="errCode"></div>
+        <div class="hint"><a href="#" id="lnkResend">Resend code</a> · <a href="#" id="lnkBack">Use a different email</a></div>
+      </div>
+    </section>
+
+    <!-- ============ JOURNEY ============ -->
+    <section id="viewJourney" class="hidden">
+      <div class="hero" style="padding-top:20px">
+        <h1 style="font-size:clamp(26px,6vw,38px)" id="welcomeTitle">Welcome!</h1>
+        <p class="tag" id="welcomeSub">Here's your personalized kickstart. Complete each step — we'll save your spot as you go.</p>
+        <div class="kid-chips" id="kidChips"></div>
+      </div>
+      <div class="journey" id="journey"></div>
+
+      <div class="card finish-card hidden" id="finishCard">
+        <div class="big">🎉🎒🎉</div>
+        <h2>You're ALL set!</h2>
+        <p class="muted" id="finishSub">Your family is officially ready for an amazing school year. We can't wait to see you!</p>
+        <button class="btn mint mt" id="btnEmailSummary">📧 Email me my summary</button>
+        <button class="btn ghost mt" id="btnReview">Review my steps</button>
+      </div>
+    </section>
+
+    <footer>
+      <div>Silicon Valley Academy · est. 1996</div>
+      <div id="footerContact"></div>
+    </footer>
+  </div>
+
+  <div class="toast" id="toast"></div>
+
+  <script src="js/config.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/api.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
