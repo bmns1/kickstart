@@ -373,7 +373,7 @@ function renderDropoff(el) {
     <p class="muted">Three quick maps so day one feels familiar:</p>
     <b>1 · Our campus</b>
     <img class="map-img" src="assets/img/campus.jpg" alt="SVA campus aerial view" loading="lazy">
-    <b>2 · Enter through the Washington Gate</b>
+    <b>2 · Enter through the Washington Gate (closed 8:30 am, reopens 2:50pm)</b>
     <img class="map-img" src="assets/img/gate.jpg" alt="Enter through Washington Gate off W Washington Ave" loading="lazy">
     <div class="callout danger">
       <div class="danger-title">⚠️ Parking restriction</div>
@@ -381,7 +381,7 @@ function renderDropoff(el) {
     </div>
     <b>3 · Drop-off & parking</b>
     <img class="map-img" src="assets/img/dropoff.jpg" alt="Parent parking, drop-off lanes and exit-only Leota gate" loading="lazy">
-    ${hasK8 ? `<div class="callout"><b>K–8th graders</b> (starting Tue 8/19): use the <b>car drop-off lane</b> adjacent to the gymnasium, then exit via the <b>Leota gate (exit only)</b>.</div>` : ''}
+    ${hasK8 ? `<div class="callout"><b>K–8th graders</b> (starting Tue 8/18): use the <b>car drop-off lane</b> adjacent to the gymnasium, then exit via the <b>Leota gate (exit only)</b>.</div>` : ''}
     ${hasPreK ? `<div class="callout"><b>PreK families:</b> drop-off and pick-up are always <b>in person at the classroom</b>. Please park <b>only in the parents parking lot</b>, then walk your child in.</div>` : ''}
     <div class="callout"><b>First day (Mon 8/17):</b> everyone parks and walks their child into the classroom.</div>`;
   doneButton(el, 'dropoff');
