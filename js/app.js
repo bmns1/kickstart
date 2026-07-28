@@ -375,7 +375,10 @@ function renderDropoff(el) {
     <img class="map-img" src="assets/img/campus.jpg" alt="SVA campus aerial view" loading="lazy">
     <b>2 · Enter through the Washington Gate</b>
     <img class="map-img" src="assets/img/gate.jpg" alt="Enter through Washington Gate off W Washington Ave" loading="lazy">
-    <div class="callout warn"><b>No SVA parking anytime</b> in the marked area by the gate — enter and keep moving.</div>
+    <div class="callout danger">
+      <div class="danger-title">⚠️ Parking restriction</div>
+      <b>No SVA parking at any time</b> in the marked area by the Washington Gate. Enter and keep moving — do not stop or wait there.
+    </div>
     <b>3 · Drop-off & parking</b>
     <img class="map-img" src="assets/img/dropoff.jpg" alt="Parent parking, drop-off lanes and exit-only Leota gate" loading="lazy">
     ${hasK8 ? `<div class="callout"><b>K–8th graders</b> (starting Tue 8/19): use the <b>car drop-off lane</b> adjacent to the gymnasium, then exit via the <b>Leota gate (exit only)</b>.</div>` : ''}

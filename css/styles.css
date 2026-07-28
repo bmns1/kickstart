@@ -182,6 +182,15 @@ a { color: var(--navy); }
 }
 .callout.warn { background: var(--gold-bg); border-color: var(--gold); }
 .callout b { color: var(--navy-dark); }
+.callout.danger {
+  background: #fdedeb; border: 1.5px solid #e5b4ae; border-left: 5px solid var(--coral);
+  font-weight: 500;
+}
+.callout.danger b, .callout.danger .danger-title { color: var(--coral); }
+.callout.danger .danger-title {
+  display: flex; align-items: center; gap: 8px; font-weight: 700; font-family: 'Sora', sans-serif;
+  font-size: 14px; text-transform: uppercase; letter-spacing: .06em; margin-bottom: 4px;
+}
 
 /* timeline of events */
 .event { display: flex; gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--border); }
