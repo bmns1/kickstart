@@ -252,6 +252,32 @@ a { color: var(--navy); }
 .uni-card h4 { color: var(--navy); margin-bottom: 6px; font-size: 15.5px; }
 .uni-card ul { padding-left: 20px; font-size: 14px; color: #3d4358; }
 
+/* pickup timeline */
+.time-strip { display: flex; align-items: stretch; gap: 6px; flex-wrap: wrap; margin: 14px 0 4px; }
+.time-chip {
+  flex: 1; min-width: 118px; background: var(--paper); border: 1px solid var(--border);
+  border-radius: 10px; padding: 10px 10px 9px; text-align: center;
+}
+.time-chip.end { background: #fdedeb; border-color: #e5b4ae; }
+.time-chip.end .tc-time { color: var(--coral); }
+.tc-time { font-family: 'Sora', sans-serif; font-weight: 700; color: var(--navy); font-size: 15px; }
+.tc-label { font-size: 11.5px; color: var(--muted); margin-top: 2px; line-height: 1.35; }
+.tc-arrow { align-self: center; color: #b8bdcc; font-weight: 700; }
+@media (max-width: 560px) { .tc-arrow { display: none; } .time-chip { min-width: 45%; } }
+
+/* extended care cards */
+.care-grid { grid-template-columns: 1fr 1fr; }
+@media (max-width: 560px) { .care-grid { grid-template-columns: 1fr; } }
+.care-card { background: #fff; }
+.care-head { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; justify-content: space-between; }
+.care-new {
+  font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em;
+  background: var(--mint-light); color: var(--mint-dark); border-radius: 999px; padding: 3px 10px; white-space: nowrap;
+}
+.care-price { font-family: 'Sora', sans-serif; font-size: 26px; font-weight: 700; color: var(--ink); margin: 6px 0 2px; }
+.care-price span { font-size: 13px; color: var(--muted); font-weight: 600; }
+.care-card ul { margin-top: 6px; }
+
 /* RSVP + choices */
 .choice-row { display: flex; gap: 10px; flex-wrap: wrap; margin: 10px 0; }
 .choice {

@@ -235,7 +235,7 @@ function openStep(stepId, scroll) {
 // ------------------------------------------------------- journey builder ----
 function enterJourney(newState) {
   state = newState;
-  progress = Object.assign({ doneSteps: {}, supplies: {}, rsvp: null, pto: null, signed: {} }, newState.progress || {});
+  progress = Object.assign({ doneSteps: {}, supplies: {}, rsvp: null, pto: null, concern: null, signed: {} }, newState.progress || {});
 
   $('#viewLanding').classList.add('hidden');
   $('#viewJourney').classList.remove('hidden');
@@ -274,11 +274,13 @@ function buildSteps() {
   steps = [
     { id: 'dates', title: 'Key dates & potluck RSVP', render: renderDates },
     { id: 'dropoff', title: 'Arrival & drop-off', render: renderDropoff },
+    { id: 'pickup', title: 'Pickup & extended care', render: el => renderPickup(el, hasPreK, hasK8) },
     { id: 'whatsapp', title: 'Classroom WhatsApp groups', render: renderWhatsapp },
     { id: 'hotlunch', title: 'Hot lunch program', render: renderHotlunch },
     ...(hasK8 ? [{ id: 'uniform', title: 'Uniform guidelines', render: () => renderUniform(hasElem, hasMS) }] : []),
     { id: 'supplies', title: 'Supply checklist', render: renderSupplies },
     { id: 'pto', title: 'PTO & volunteering', render: renderPTO },
+    { id: 'concerns', title: 'Questions & concerns', render: renderConcerns },
     { id: 'policy', title: 'Conduct policy — review & sign', render: () => renderPolicy(hasPreK, hasK8) },
   ];
 }
@@ -385,6 +387,45 @@ function renderDropoff(el) {
     ${hasPreK ? `<div class="callout"><b>PreK families:</b> drop-off and pick-up are always <b>in person at the classroom</b>. Please park <b>only in the parents parking lot</b>, then walk your child in.</div>` : ''}
     <div class="callout"><b>First day (Mon 8/17):</b> everyone parks and walks their child into the classroom.</div>`;
   doneButton(el, 'dropoff');
+}
+
+// ----------------------------------------------------------- step: pickup ----
+function renderPickup(el, hasPreK, hasK8) {
+  const careCards = [];
+  if (hasK8) careCards.push(`
+    <div class="uni-card care-card">
+      <div class="care-head"><h4>Extended Care · K–8</h4><span class="care-new">New provider this year</span></div>
+      <div class="care-price">$20<span>/hour</span></div>
+      <p class="muted">Available every school day until 6:00 PM sharp, with an enriched program:</p>
+      <ul>
+        <li>Creative activities</li>
+        <li>Outdoor play</li>
+        <li>Islamic learning</li>
+        <li>…and more</li>
+      </ul>
+    </div>`);
+  if (hasPreK) careCards.push(`
+    <div class="uni-card care-card">
+      <div class="care-head"><h4>Extended Care · PreK</h4></div>
+      <div class="care-price">$20<span>/hour</span></div>
+      <p class="muted">Pick up your child in person at the classroom, any time up to 6:00 PM sharp.</p>
+    </div>`);
+
+  el.innerHTML = `
+    <p class="muted">School dismissal is at 3:00 PM. Here is how the afternoon works:</p>
+    <div class="time-strip">
+      <div class="time-chip"><div class="tc-time">3:00 PM</div><div class="tc-label">Dismissal &amp; pickup</div></div>
+      <div class="tc-arrow">→</div>
+      <div class="time-chip"><div class="tc-time">3:15 PM</div><div class="tc-label">Grace period ends</div></div>
+      <div class="tc-arrow">→</div>
+      <div class="time-chip"><div class="tc-time">After 3:15</div><div class="tc-label">Checked in to Extended Care</div></div>
+      <div class="tc-arrow">→</div>
+      <div class="time-chip end"><div class="tc-time">6:00 PM</div><div class="tc-label">Extended Care closes — sharp</div></div>
+    </div>
+    <div class="callout">Please pick up by <b>3:15 PM</b>. Students not picked up within the 15-minute grace period are automatically checked in to Extended Care, billed at <b>$20 per hour</b>.</div>
+    <div class="uni-grid care-grid">${careCards.join('')}</div>
+    <div class="callout warn"><b>Expecting a delay past 6:00 PM?</b> Extended Care ends at 6:00 PM sharp. Please notify the school in advance and arrange for an authorized pickup person to collect your child <b>before 6:00 PM</b>.</div>`;
+  doneButton(el, 'pickup');
 }
 
 // --------------------------------------------------------- step: whatsapp ----
@@ -554,6 +595,59 @@ function renderPTO(el) {
     } catch (err) { toast('Could not send — please try again.'); }
     finally { btn.disabled = false; btn.textContent = 'Send to the school'; }
   });
+}
+
+// --------------------------------------------------------- step: concerns ----
+function renderConcerns(el) {
+  const saved = progress.concern;
+  const CATS = ['General', 'Academics', 'Safety & wellbeing', 'Drop-off & pickup', 'Health & allergies', 'Other'];
+  let category = (saved && saved.category) || 'General';
+
+  el.innerHTML = `
+    <p class="muted">Your voice matters to us. If there is anything you would like the school to know — a question, a worry, or something we could do better — please share it here. Your note goes directly and privately to the school office.</p>
+    ${saved ? `<div class="callout">Thank you — you shared a note with us${saved.at ? ' on ' + esc(saved.at) : ''}. You're welcome to send another below.</div>` : ''}
+    <div class="choice-row" id="concernCats">
+      ${CATS.map(c => `<button class="choice ${c === category ? 'on' : ''}" data-v="${esc(c)}">${esc(c)}</button>`).join('')}
+    </div>
+    <textarea class="field" id="concernText" placeholder="Share your question or concern in as much or as little detail as you like…"></textarea>
+    <label class="check-item agree" style="padding-left:0" data-role="follow">
+      <div class="cbox">✓</div>
+      <div class="c-name">I would like someone from the school to follow up with me.</div>
+    </label>
+    <button class="btn mt" id="btnConcernSubmit">Send privately to the school</button>
+    <button class="btn ghost mt" id="btnConcernSkip">Nothing to share right now — continue</button>
+    <div class="err" id="concernErr"></div>`;
+
+  $$('#concernCats .choice', el).forEach(b => b.addEventListener('click', () => {
+    $$('#concernCats .choice', el).forEach(x => x.classList.remove('on'));
+    b.classList.add('on');
+    category = b.dataset.v;
+  }));
+
+  const follow = $('[data-role=follow]', el);
+  follow.addEventListener('click', () => follow.classList.toggle('checked'));
+
+  $('#btnConcernSubmit', el).addEventListener('click', async e => {
+    const btn = e.currentTarget;
+    const err = $('#concernErr', el);
+    err.style.display = 'none';
+    const text = $('#concernText', el).value.trim();
+    if (!text) { err.textContent = 'Please write a short note first, or choose "Nothing to share right now".'; err.style.display = 'block'; return; }
+    const data = { category, text, followUp: follow.classList.contains('checked') };
+    btn.disabled = true; btn.innerHTML = '<span class="spin"></span> Sending…';
+    try {
+      await API.submit(session.email, session.token, 'family_concern', data);
+      progress.concern = { category, at: new Date().toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) };
+      queueSave();
+      toast('Thank you — the school office has received your note.');
+      markDone('concerns');
+    } catch (er) {
+      err.textContent = 'Could not send — please try again.'; err.style.display = 'block';
+      btn.disabled = false; btn.textContent = 'Send privately to the school';
+    }
+  });
+
+  $('#btnConcernSkip', el).addEventListener('click', () => markDone('concerns'));
 }
 
 // ----------------------------------------------------------- step: policy ----
