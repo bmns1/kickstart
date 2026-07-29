@@ -600,11 +600,11 @@ function renderPTO(el) {
 // --------------------------------------------------------- step: concerns ----
 function renderConcerns(el) {
   const saved = progress.concern;
-  const CATS = ['General', 'Academics', 'Safety & wellbeing', 'Drop-off & pickup', 'Health & allergies', 'Other'];
+  const CATS = ['General', 'Academics', 'Safety & wellbeing', 'Drop-off & pickup', 'Health & allergies policies', 'Other'];
   let category = (saved && saved.category) || 'General';
 
   el.innerHTML = `
-    <p class="muted">Your voice matters to us. If there is anything you would like the school to know — a question, a worry, or something we could do better — please share it here. Your note goes directly and privately to the school office.</p>
+    <p class="muted">Your voice matters to us. Think of this as a conversation starter, not a formal call to action. If there is anything you would like the school to know — a question, a worry, or something we could do better — please share it here. Your note goes directly and privately to the school office.</p>
     ${saved ? `<div class="callout">Thank you — you shared a note with us${saved.at ? ' on ' + esc(saved.at) : ''}. You're welcome to send another below.</div>` : ''}
     <div class="choice-row" id="concernCats">
       ${CATS.map(c => `<button class="choice ${c === category ? 'on' : ''}" data-v="${esc(c)}">${esc(c)}</button>`).join('')}
