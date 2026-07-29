@@ -423,7 +423,7 @@ function renderPickup(el, hasPreK, hasK8) {
       <div class="time-chip end"><div class="tc-time">6:00 PM</div><div class="tc-label">Extended Care closes — sharp</div></div>
     </div>
     <div class="callout">Please pick up by <b>3:15 PM</b>. Students not picked up within the 15-minute grace period are automatically checked in to Extended Care, billed at <b>$20 per hour</b>.</div>
-         <div class="callout warn">After-School Supervision: Once picked up, children must remain fully supervised by an adult while on school grounds. Any unattended child will be checked into Extended Care, resulting in a drop-in charge to the parents' account. Continued failure to supervise children may result in the loss of after-school playground privileges.</b>.</div>
+         <div class="callout warn">After-School Supervision: Once picked up, children must remain fully supervised by an adult while on school grounds. Any unattended child will be checked into Extended Care, resulting in a drop-in charge to the parents' account. Continued failure to supervise children may result in the loss of school privileges.</b>.</div>
     <div class="uni-grid care-grid">${careCards.join('')}</div>
     <div class="callout warn"><b>Expecting a delay past 6:00 PM?</b> Extended Care ends at 6:00 PM sharp. Please notify the school in advance and arrange for an authorized pickup person to collect your child <b>before 6:00 PM</b>.</div>`;
   doneButton(el, 'pickup');
