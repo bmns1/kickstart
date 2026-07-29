@@ -46,7 +46,7 @@ const API = (() => {
       { date: '2026-08-14', title: 'Orientation', description: "Come meet us in the classroom any time between 10 AM – 1 PM. Please bring your child's supplies in a labeled bag or small box.", emoji: '🏫', audience: 'all' },
       { date: '2026-08-16', title: 'PTO Potluck Picnic', description: 'Meet fellow parents and students at Washington Park, Sunnyvale, 11:00 AM – 3:00 PM — and bring a dish to share!', emoji: '🧺', audience: 'all' },
       { date: '2026-08-17', title: 'First Day of School', description: 'Please park and walk your child into their classroom.', emoji: '🎒', audience: 'all' },
-      { date: '2026-08-19', title: 'Drop-off Routine Begins', description: 'KG–8th graders may be dropped off in the drop-off lane adjacent to the gymnasium. PreK drop-off stays in person at the classroom.', emoji: '🚗', audience: 'all' },
+      { date: '2026-08-18', title: 'Drop-off Routine Begins', description: 'KG–8th graders may be dropped off in the drop-off lane adjacent to the gymnasium. PreK drop-off stays in person at the classroom.', emoji: '🚗', audience: 'all' },
       { date: '2026-08-24', title: 'Hot Lunch Begins', description: 'Hot lunch offered every school day. Explore the menu on the parent portal starting 8/7.', emoji: '🍱', audience: 'all' },
     ],
     config: {
