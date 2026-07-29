@@ -407,8 +407,8 @@ function renderPickup(el, hasPreK, hasK8) {
   if (hasPreK) careCards.push(`
     <div class="uni-card care-card">
       <div class="care-head"><h4>Extended Care · PreK</h4></div>
-      <div class="care-price">$20<span>/hour</span></div>
-      <p class="muted">Pick up your child in person at the classroom, any time up to 6:00 PM sharp.</p>
+      <div class="care-price">$18<span>/hour</span></div>
+      <p class="muted">Pick up your child in person at the classroom, any time up to 5:30 PM sharp. Each additional minute after 5:30 PM is $1/min.</p>
     </div>`);
 
   el.innerHTML = `
@@ -420,12 +420,12 @@ function renderPickup(el, hasPreK, hasK8) {
       <div class="tc-arrow">→</div>
       <div class="time-chip"><div class="tc-time">After 3:15</div><div class="tc-label">Checked in to Extended Care</div></div>
       <div class="tc-arrow">→</div>
-      <div class="time-chip end"><div class="tc-time">6:00 PM</div><div class="tc-label">Extended Care closes — sharp</div></div>
+      <div class="time-chip end"><div class="tc-time">6:00 PM (5:30 PM PreK)</div><div class="tc-label">Extended Care closes — sharp</div></div>
     </div>
     <div class="callout">Please pick up by <b>3:15 PM</b>. Students not picked up within the 15-minute grace period are automatically checked in to Extended Care, billed at <b>$20 per hour</b>.</div>
          <div class="callout warn">After-School Supervision: Once picked up, children must remain fully supervised by an adult while on school grounds. Any unattended child will be checked into Extended Care, resulting in a drop-in charge to the parents' account. Continued failure to supervise children may result in the loss of school privileges.</b>.</div>
     <div class="uni-grid care-grid">${careCards.join('')}</div>
-    <div class="callout warn"><b>Expecting a delay past 6:00 PM?</b> Extended Care ends at 6:00 PM sharp. Please notify the school in advance and arrange for an authorized pickup person to collect your child <b>before 6:00 PM</b>.</div>`;
+    <div class="callout warn"><b>Expecting a delay past 6:00 PM (5:30 PreK)?</b> Extended Care ends at 6:00 PM sharp (5:30 PreK). Please notify the school in advance and arrange for an authorized pickup person to collect your child <b>before 6:00 PM (5:30 PreK)</b>.</div>`;
   doneButton(el, 'pickup');
 }
 
