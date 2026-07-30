@@ -276,7 +276,7 @@ function buildSteps() {
     { id: 'dropoff', title: 'Arrival & drop-off', render: renderDropoff },
     { id: 'pickup', title: 'Pickup & extended care', render: el => renderPickup(el, hasPreK, hasK8) },
     { id: 'whatsapp', title: 'Classroom WhatsApp groups', render: renderWhatsapp },
-    { id: 'hotlunch', title: 'Hot lunch program', render: renderHotlunch },
+    { id: 'hotlunch', title: 'Parent portal & hot lunch', render: renderHotlunch },
     ...(hasK8 ? [{ id: 'uniform', title: 'Uniform guidelines', render: () => renderUniform(hasElem, hasMS) }] : []),
     { id: 'supplies', title: 'Supply checklist', render: renderSupplies },
     { id: 'pto', title: 'PTO & volunteering', render: renderPTO },
@@ -423,7 +423,7 @@ function renderPickup(el, hasPreK, hasK8) {
       <div class="time-chip end"><div class="tc-time">6:00 PM (5:30 PM PreK)</div><div class="tc-label">Extended Care closes — sharp</div></div>
     </div>
     <div class="callout">Please pick up by <b>3:15 PM</b>. Students not picked up within the 15-minute grace period are automatically checked in to Extended Care, billed at <b>$20 per hour</b>.</div>
-         <div class="callout warn">After-School Supervision: Once picked up, children must remain fully supervised by an adult while on school grounds. Any unattended child will be checked into Extended Care, resulting in a drop-in charge to the parents' account. Continued failure to supervise children may result in the loss of school privileges.</b>.</div>
+    <div class="callout warn"><b>After-school supervision:</b> Once picked up, children must remain fully supervised by an adult while on school grounds. Any unattended child will be checked into Extended Care, resulting in a drop-in charge to the parents' account. Continued failure to supervise children may result in the loss of school privileges.</div>
     <div class="uni-grid care-grid">${careCards.join('')}</div>
     <div class="callout warn"><b>Expecting a delay past 6:00 PM (5:30 PreK)?</b> Extended Care ends at 6:00 PM sharp (5:30 PreK). Please notify the school in advance and arrange for an authorized pickup person to collect your child <b>before 6:00 PM (5:30 PreK)</b>.</div>`;
   doneButton(el, 'pickup');
@@ -449,9 +449,26 @@ function renderWhatsapp(el) {
 
 // --------------------------------------------------------- step: hotlunch ----
 function renderHotlunch(el) {
+  const portalFeatures = [
+    ['🤒', 'Report an absence'],
+    ['⏰', 'Report a tardy'],
+    ['📅', 'View school events'],
+    ['🙋', 'Sign up for volunteering'],
+    ['🍱', 'Order hot lunch'],
+    ['🎥', 'Watch live events at school'],
+  ];
+
   el.innerHTML = `
-    <div class="callout">${esc(state.config.hotlunch_note || 'Hot lunch starts 8/24, offered all school days.')}</div>
-    <a class="link-tile" href="${esc(link('parent_portal'))}" target="_blank" rel="noopener"><span class="li-emoji">🍱</span> Explore the hot lunch menu (parent portal)</a>`;
+    <p class="muted">The parent portal is your one-stop shop for everything school-related this year.</p>
+    <div class="portal-grid">
+      ${portalFeatures.map(([e, t]) => `<div class="portal-item"><span class="pi-emoji">${e}</span>${esc(t)}</div>`).join('')}
+      <div class="portal-item more">…and more</div>
+    </div>
+    <div class="callout"><b>Full details and your sign-in instructions will follow by Thursday, 8/7.</b> Watch your inbox — there's nothing you need to do right now.</div>
+    <a class="link-tile" style="display:flex" href="${esc(link('parent_portal'))}" target="_blank" rel="noopener"><span class="li-emoji">🌐</span> Visit the parent portal</a>
+
+    <h4 class="sub-head">Hot lunch</h4>
+    <div class="callout">${esc(state.config.hotlunch_note || 'Hot lunch starts 8/24, offered all school days.')}</div>`;
   doneButton(el, 'hotlunch');
 }
 

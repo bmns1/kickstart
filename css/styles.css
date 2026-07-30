@@ -252,6 +252,26 @@ a { color: var(--navy); }
 .uni-card h4 { color: var(--navy); margin-bottom: 6px; font-size: 15.5px; }
 .uni-card ul { padding-left: 20px; font-size: 14px; color: #3d4358; }
 
+/* parent portal feature grid */
+.portal-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
+@media (max-width: 520px) { .portal-grid { grid-template-columns: 1fr; } }
+.portal-item {
+  display: flex; align-items: center; gap: 10px; background: var(--paper);
+  border: 1px solid var(--border); border-radius: 10px; padding: 11px 14px;
+  font-size: 14px; font-weight: 500; color: var(--ink);
+}
+.portal-item .pi-emoji { font-size: 17px; }
+.portal-item.more {
+  grid-column: 1 / -1; justify-content: center; font-style: italic;
+  color: var(--muted); font-weight: 400; border-style: dashed;
+}
+
+/* in-step sub-heading */
+.sub-head {
+  font-family: 'Sora', sans-serif; font-size: 15px; font-weight: 600; color: var(--ink);
+  margin: 22px 0 2px; padding-top: 18px; border-top: 1px solid var(--border);
+}
+
 /* pickup timeline */
 .time-strip { display: flex; align-items: stretch; gap: 6px; flex-wrap: wrap; margin: 14px 0 4px; }
 .time-chip {
